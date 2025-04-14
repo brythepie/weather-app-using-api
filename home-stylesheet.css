@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.app-header {
+    text-align: center;
+    background-color: #007BFF; /* Blue background for the header */
+    color: white;
+    padding: 15px 0;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-bar {
+    width: 100%; /* Full width */
+    max-width: 600px; /* Limit the maximum width */
+    display: flex;
+    justify-content: center; /* Center the input and button */
+    align-items: center; /* Vertically center the content */
+    margin-top: 10px; 
+}
+
+.search-bar input {
+    flex-grow: 1;
+    height: 40px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    padding: 10px; /* Added for better visual appearance */
+    border: 1px solid #ccc; /* Added a border for better visual appearance */
+    font-size: 14px;
+}
+
+.search-bar button {
+    width: 100px;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px; /* Added for better visual appearance */
+    border: none; /* Removed default border */
+    background-color: #4CAF50; /* Added background color */
+    color: white; /* Added text color */
+    font-size: 14px;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
+}
+
+/* Base styles (already present in your file) */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Media Queries */
+
+/* For tablets (screen width 768px and below) */
+@media (max-width: 768px) {
+    .app-header {
+        font-size: 24px; /* Reduce header font size */
+        padding: 10px 0; /* Adjust padding */
+    }
+
+    .search-bar {
+        max-width: 90%; /* Reduce the width of the search bar */
+        margin-top: 15px; /* Add more spacing */
+    }
+
+    .search-bar input {
+        font-size: 12px; /* Reduce font size for input */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .search-bar button {
+        font-size: 12px; /* Reduce font size for button */
+        padding: 8px; /* Adjust padding */
+        width: 80px; /* Reduce button width */
+    }
+
+    .container {
+        max-width: 90%; /* Reduce container width */
+        padding: 15px; /* Adjust padding */
+    }
+}
+
+/* For mobile devices (screen width 480px and below) */
+@media (max-width: 480px) {
+    .app-header {
+        font-size: 20px; /* Further reduce header font size */
+        padding: 8px 0; /* Adjust padding */
+    }
+
+    .search-bar {
+        flex-direction: column; /* Stack input and button vertically */
+        max-width: 100%; /* Full width */
+        margin-top: 10px; /* Adjust spacing */
+    }
+
+    .search-bar input {
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 10px; /* Add bottom margin */
+        width: 100%; /* Full width */
+        font-size: 12px; /* Reduce font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .search-bar button {
+        width: 100%; /* Full width */
+        font-size: 12px; /* Reduce font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .container {
+        max-width: 95%; /* Reduce container width */
+        padding: 10px; /* Adjust padding */
+    }
+}
