@@ -4,33 +4,110 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather App</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="home-stylesheet.css">
     </head>
-    <body>
 
-        <header class="app-header">
-            <h1>Weather App</h1>
-            <div class="search-bar">
-                <input id="locationInput" list="citySuggestions" placeholder="Enter city name" />
-                <datalist id="citySuggestions"></datalist>
-                <button id="searchButton">Search</button>
+    <!-- Weather Effect Div -->
+    <div id="weatherEffect"></div>
+
+    <body class="bg-light d-flex flex-column">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top justify-content-center">
+            <span class="navbar-brand mb-0 h1">Weather App</span>
+        </nav>
+
+        <!-- Search Bar -->
+        <header class="search-bar py-4">
+            <div class="search-bar-container">
+                <div class="input-group">
+                    <input 
+                        id="locationInput" 
+                        type="text" 
+                        class="form-control" 
+                        list="citySuggestions" 
+                        placeholder="Enter city name"
+                        aria-label="City Name"
+                    >
+                    <datalist id="citySuggestions"></datalist>
+                    <button id="searchButton" class="btn btn-secondary ms-2">
+                        Search
+                    </button>
+                </div>
             </div>
         </header>
 
-       <div class="container">
+        <!-- Weather Info Cards -->
+        <main class="dashboard d-flex flex-column align-items-center">
 
-            <div id="weatherInfo">
-                <h2 id="location"></h2>
-                <h2 id="temperature"></h2>
-                <h2 id="description"></h2>
-                <button id="detailsButton">More Details</button>
+            <!-- Basic Info Card -->
+            <div class="card text-center shadow-sm p-4 mb-4 w-100">
+                <h2 id="location" class="card-title mb-2"></h2>
+                <h1 id="temperature" class="display-1 card-text mb-2"></h1>
+                <h4 id="description" class="text-muted mb-4"></h4>
             </div>
-        </div>
+            
+            <!-- Advanced Info Cards -->
+            <div class="row g-4 mb-4 w-100">
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h5 class="card-title">Humidity</h5>
+                        <p id="humidity" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h5 class="card-title">Wind</h5>
+                        <p id="wind" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h5 class="card-title">Pressure</h5>
+                        <p id="pressure" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More Advanced Info Cards -->
+            <div class="row g-4 mb-4 w-100">
+                <div class="col-md-3">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h6 class="card-title">Feels Like</h6>
+                        <p id="feelsLike" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h6 class="card-title">Visibility</h6>
+                        <p id="visibility" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h6 class="card-title">Sunrise</h6>
+                        <p id="sunrise" class="card-text"></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-sm p-3 text-center h-100">
+                        <h6 class="card-title">Sunset</h6>
+                        <p id="sunset" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
 
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3 mt-auto">
+            <small>Weather App</small>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="app.js"></script>
+
     </body>
-
-    <footer>
-
-    </footer>
 </html>

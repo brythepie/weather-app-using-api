@@ -1,4 +1,4 @@
-const apiKey = '28dd9020c5883464f5fea254c96696aa';
+const apiKey = "a9bd344737e10da594a9baad29940aff"; // replaced broken apiKey with functioning apiKey
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 const locationInput = document.getElementById('locationInput');
@@ -36,40 +36,31 @@ function fetchCitySuggestions(query) {
         });
 }
 
-searchButton.addEventListener('click', () => {
-    const location = locationInput.value;
-    if (location) {
-        fetchWeather(location);
-    }
-});
-
 function fetchWeather(location) {
     const url = `${apiUrl}?q=${location}&appid=${apiKey}&units=imperial`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            locationElement.textContent = data.name;
-            temperatureElement.textContent = `${Math.round(data.main.temp)}°F`;
+            locationElement.textContent = `${data.name}, ${data.sys.country}`;
+            temperatureElement.textContent = `${Math.round(data.main.temp)}°`;
             descriptionElement.textContent = data.weather[0].description;
 
-            const currentTime = new Date().getTime() / 1000; // Current time in seconds
-            const sunrise = data.sys.sunrise; // Sunrise time in seconds
-            const sunset = data.sys.sunset; // Sunset time in seconds
+            // Update additional fields
+            document.getElementById('humidity').textContent = `${data.main.humidity}%`;
+            document.getElementById('wind').textContent = `${data.wind.speed} mph`;
+            document.getElementById('pressure').textContent = `${data.main.pressure} hPa`;
+            document.getElementById('feelsLike').textContent = `${Math.round(data.main.feels_like)}°`;
+            document.getElementById('visibility').textContent = `${(data.visibility / 1609).toFixed(1)} mi`; // meters to miles
 
-            // Determine the time of day
-            let timeOfDay = '';
-            if (currentTime >= sunrise && currentTime < sunrise + 3600) {
-                timeOfDay = 'sunrise'; // 1 hour after sunrise
-            } else if (currentTime >= sunset - 3600 && currentTime < sunset) {
-                timeOfDay = 'sunset'; // 1 hour before sunset
-            } else if (currentTime >= sunrise && currentTime < sunset) {
-                timeOfDay = 'day';
-            } else {
-                timeOfDay = 'night';
-            }
+            // Sunrise and Sunset
+            const sunriseTime = new Date(data.sys.sunrise * 1000);
+            const sunsetTime = new Date(data.sys.sunset * 1000);
 
-            updateBackground(data.weather[0].main); // Update background based on weather condition
+            document.getElementById('sunrise').textContent = sunriseTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('sunset').textContent = sunsetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            updateBackground(data.weather[0].main);
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
@@ -128,11 +119,13 @@ function loadRecentSearches() {
 
 function updateBackground(weatherCondition) {
     const body = document.body;
+    const weatherEffect = document.getElementById('weatherEffect');
 
-    // Clear any existing background classes
+    // Clear any existing background classes/animations
     body.className = '';
+    weatherEffect.innerHTML = '';
 
-    // Set a background based on the weather condition
+    // Set background/animation based on the weather condition
     switch (weatherCondition.toLowerCase()) {
         case 'clear':
             body.classList.add('clear-weather');
@@ -143,16 +136,43 @@ function updateBackground(weatherCondition) {
         case 'rain':
         case 'drizzle':
             body.classList.add('rainy-weather');
+            generateRain();
             break;
         case 'thunderstorm':
             body.classList.add('stormy-weather');
+            generateRain();
             break;
         case 'snow':
             body.classList.add('snowy-weather');
+            generateSnow(); 
             break;
         default:
             body.classList.add('default-weather');
             break;
+    }
+
+    body.classList.add('d-flex', 'flex-column');
+}
+
+function generateSnow() {
+    const weatherEffect = document.getElementById('weatherEffect');
+    for (let i = 0; i < 50; i++) { // 50 snowflakes
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.style.left = `${Math.random() * 100}%`;
+        snowflake.style.animationDuration = `${5 + Math.random() * 5}s`; // between 5-10s
+        weatherEffect.appendChild(snowflake);
+    }
+}
+
+function generateRain() {
+    const weatherEffect = document.getElementById('weatherEffect');
+    for (let i = 0; i < 100; i++) { // 100 raindrops
+        const raindrop = document.createElement('div');
+        raindrop.className = 'raindrop';
+        raindrop.style.left = `${Math.random() * 100}%`;
+        raindrop.style.animationDuration = `${1 + Math.random()}s`; // between 1-2s
+        weatherEffect.appendChild(raindrop);
     }
 }
 
